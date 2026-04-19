@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureX</title>
-        <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+    <link rel="manifest" href="/manifest.json">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -520,6 +522,19 @@
     <div class="notification" id="notification">Пароль скопирован!</div>
 
     <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+              .then(registration => {
+                console.log('Service Worker зарегистрирован:', registration);
+              })
+              .catch(error => {
+                console.error('Ошибка регистрации Service Worker:', error);
+              });
+          });
+        }
+
+        
         // Элементы DOM
         const passwordInput = document.getElementById('password');
         const lengthSlider = document.getElementById('length');
